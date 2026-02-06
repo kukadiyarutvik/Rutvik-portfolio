@@ -1,4 +1,5 @@
 const sections = document.querySelectorAll("section");
+const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-links a");
 
 window.addEventListener("scroll", () => {
@@ -6,7 +7,9 @@ window.addEventListener("scroll", () => {
 
   sections.forEach(section => {
     const sectionTop = section.offsetTop - 150;
-    if (scrollY >= sectionTop) {
+    const sectionHeight = section.offsetHeight;
+
+    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
       current = section.getAttribute("id");
     }
   });
@@ -18,3 +21,17 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+
+const allVideos = document.querySelectorAll("video");
+
+allVideos.forEach(video => {
+  video.addEventListener("play", () => {
+    allVideos.forEach(otherVideo => {
+      if (otherVideo !== video) {
+        otherVideo.pause();
+      }
+    });
+  });
+});
+
+
