@@ -1,5 +1,4 @@
 const sections = document.querySelectorAll("section");
-const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-links a");
 
 window.addEventListener("scroll", () => {
@@ -22,16 +21,17 @@ window.addEventListener("scroll", () => {
   });
 });
 
-const allVideos = document.querySelectorAll("video");
+const videos = document.querySelectorAll("video");
 
-allVideos.forEach(video => {
+videos.forEach(video => {
+  video.autoplay = false;
+
   video.addEventListener("play", () => {
-    allVideos.forEach(otherVideo => {
-      if (otherVideo !== video) {
+    videos.forEach(otherVideo => {
+      if (otherVideo !== video && !otherVideo.paused) {
         otherVideo.pause();
+        otherVideo.currentTime = 0; 
       }
     });
   });
 });
-
-
